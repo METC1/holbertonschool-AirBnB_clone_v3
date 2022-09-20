@@ -81,9 +81,11 @@ class DBStorage:
         or None if not found
         """
 
-        class_dict = self.all(cls)
-        key = "{}.{}".format(cls.__name__, id)
-        return class_dict.get(key)
+        objects = self.all(cls)
+        for obj in objects.values():
+            if obj.id == id:
+                return obj
+        return None
 
     def count(self, cls=None):
         """
