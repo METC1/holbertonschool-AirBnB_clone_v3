@@ -17,17 +17,20 @@ def states():
     list_states = []
     for state in states.values():
         list_states.append(state.to_dict())
-    return(jsonify(list_states)
+    return(jsonify(list_states))
 
-@app_views.route('/states/<state_id>', strict_slashes=False, methods=['GET'])
+
+@app_views.route('/states/<state_id>', strict_slashes=False,
+                 methods=['GET'])
 def states_id(state_id):
     """
     Display a state by its ID
     """
-    state =storage.get(State, state_id)
+    state = storage.get(State, state_id)
     if state is None:
         abort(404)
     return(jsonify(state.to_dict()))
+
 
 @app_views.route('/states', strict_slashes=False, methods=['POST'])
 def create_state():
@@ -56,11 +59,11 @@ def update_state(state_id):
         abort(404)
     if not request.get_json():
         error = {"error": "Not a JSON"}
-        return(jsonify(error),400)
+        return(jsonify(error), 400)
     obj_dict = request.get_json()
     ignore_keys = ['id', 'created_at', 'updated_at']
     for key in obj_dict.keys():
         if key not in ignore_key:
-        setattr(state, key, obj_dict[key])
+            setattr(state, key, obj_dict[key])
     state.save()
     return(jsonify(state.to_dict()), 200)
