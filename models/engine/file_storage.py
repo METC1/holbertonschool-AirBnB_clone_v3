@@ -75,9 +75,11 @@ class FileStorage:
         or None if not found
         """
 
-        class_dict = self.all(cls)
-        key = "{}.{}".format(cls.__name__, id)
-        return class_dict.get(key)
+        if self.all(cls):
+            for object in self.all(cls).values():
+                if object.id == id:
+                    return object
+        return None
 
     def count(self, cls=None):
         """
