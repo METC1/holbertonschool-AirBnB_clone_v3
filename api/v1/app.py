@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""RESTful API AirBnB Clone"""
+"""
+RESTful API AirBnB Clone
+"""
 from models import storage
 from api.vi.views import app_views
 from flask import Flask, jsonify, make_response
@@ -14,13 +16,17 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def storage_close(self):
-    """handles @app.teardown_appcontext which calls storage.close()"""
+    """
+    handles @app.teardown_appcontext which calls storage.close()
+    """
     storage.close()
 
 
 @app.errorhandler(404)
 def not_found(error):
-    """Handles 404 errors not found and returns a JSON - format 404"""
+    """
+    Handles 404 errors not found and returns a JSON - format 404
+    """
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
