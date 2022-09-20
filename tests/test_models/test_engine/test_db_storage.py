@@ -70,12 +70,12 @@ test_db_storage.py'])
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_t != 'db', "not testing file storage")
     def test_all_returns_dict(self):
         """Test that all returns a dictionaty"""
         self.assertIs(type(models.storage.all()), dict)
 
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_t != 'db', "not testing file storage")
     def test_get(self):
         """Test that get is returning the object based on it's class and id"""
         self.assertNotEqual(models.storage.get('Land', '20'), int)
@@ -84,7 +84,7 @@ class TestFileStorage(unittest.TestCase):
         models.storage.save()
         self.assertEqual(models.storage.get(State, new_st.id).id, new_st.id)
 
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_t != 'db', "not testing file storage")
     def test_count(self):
         """Test that count is returning the number of objects in storage
         based on it's class and id"""
