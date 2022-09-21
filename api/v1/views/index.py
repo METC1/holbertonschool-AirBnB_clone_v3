@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-app_views routes
+imanages pp_views routes using flask and python
 """
 
 from api.v1.views import app_views
@@ -22,8 +22,8 @@ def stats():
     route /stats returns the number of objects by type
     """
     return (jsonify({"amenities": storage.count('Amenity'),
-                    "cities": storage.count('City'),
-                    "places": storage.count('Place'),
-                    "reviews": storage.count('Review'),
-                    "states": storage.count('State'),
-                    "users": storage.count('User')}))
+                     "cities": storage.count('City'),
+                     "places": storage.count('Place'),
+                     "reviews": storage.count('Review'),
+                     "states": storage.count('State'),
+                     "users": storage.count('User')}))
