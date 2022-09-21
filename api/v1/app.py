@@ -27,7 +27,7 @@ def not_found(error):
     """
     Handles 404 errors not found and returns a JSON - format 404
     """
-    return make_response(jsonify({'error': 'Not found'}), 404)
+    return (jsonify({'error': 'Not found'}), 404)
 
 
 if __name__ == "__main__":
