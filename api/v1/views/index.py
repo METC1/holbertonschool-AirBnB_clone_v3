@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 manages app views routes using flask and python
-also uses jsonify to convert to json 
+also uses jsonify to convert to json
 """
 
 from api.v1.views import app_views
@@ -12,7 +12,7 @@ from models import storage
 @app_views.route('/status', strict_slashes=False)
 def status():
     """
-    route status returns a status:OK in the JSON format
+    route status returns a status OK in the JSON format
     """
     return (jsonify({'status': 'ok'}))
 
