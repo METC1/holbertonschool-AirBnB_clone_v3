@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-imanages pp_views routes using flask and python
+manages app views routes using flask and python
+also uses jsonify to convert to json 
 """
 
 from api.v1.views import app_views
@@ -11,7 +12,7 @@ from models import storage
 @app_views.route('/status', strict_slashes=False)
 def status():
     """
-    route /status returns a status:OK in the JSON format
+    route status returns a status:OK in the JSON format
     """
     return (jsonify({'status': 'ok'}))
 
@@ -19,7 +20,7 @@ def status():
 @app_views.route('/stats', strict_slashes=False)
 def stats():
     """
-    route /stats returns the number of objects by type
+    route stats returns the number of objects by type
     """
     return (jsonify({"amenities": storage.count('Amenity'),
                      "cities": storage.count('City'),
