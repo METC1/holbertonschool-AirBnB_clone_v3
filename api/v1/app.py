@@ -1,34 +1,36 @@
 #!/usr/bin/python3
 """
-RESTful API AirBnB Clone
+Create variable app as instance of flask
 """
+from api.v1.views import app_views
+from flask import Flask, jsonify
 from models import storage
-from api.vi.views import app_views
-from flask import Flask, jsonify, make_response
 from os import getenv
-from flask_cors import CORS
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 app.register_blueprint(app_views)
+
+
+@app.errorhandler(404)
+def handle_404(error):
+    """
+    Custom message for 404 error
+    """
+    return (jsonify({"error": "Not found"}), 404)
 
 
 @app.teardown_appcontext
 def storage_close(self):
     """
-    handles @app.teardown_appcontext which calls storage.close()
+    Method to handle @app.teardown_appcontext that calls storage.close()
     """
+
     storage.close()
 
 
-@app.errorhandler(404)
-def not_found(error):
-    """
-    Handles 404 errors not found and returns a JSON - format 404
-    """
-    return (jsonify({'error': 'Not found'}), 404)
-
-
 if __name__ == "__main__":
+    # os.getenv() method returns the value of the environment variable key
+    # i.e. HBNB_API_HOST if it exists otherwise returns the default value,
+    # i.e. 0.0.0.0
     app.run(host=getenv('HBNB_API_HOST', '0.0.0.0'),
             port=getenv('HBNB_API_PORT', '5000'), threaded=True)
