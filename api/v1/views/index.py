@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-""" app_views routes"""
+"""
+app_views routes
+"""
+
 from api.v1.views import app_views
 from flask import Flask, jsonify
 from models import storage
@@ -7,13 +10,17 @@ from models import storage
 
 @app_views.route('/status', strict_slashes=False)
 def status():
-    """route /status returns a status:OK in the JSON format"""
+    """
+    route /status returns a status:OK in the JSON format
+    """
     return (jsonify({'status': 'ok'}))
 
 
 @app_views.route('/stats', strict_slashes=False)
 def stats():
-    """route /stats returns the number of objects by type"""
+    """
+    route /stats returns the number of objects by type
+    """
     return (jsonify({"amenities": storage.count('Amenity'),
                     "cities": storage.count('City'),
                     "places": storage.count('Place'),
